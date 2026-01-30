@@ -74,13 +74,15 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
 
     const title = typeof data.title === 'string' ? data.title : slug;
     const description = typeof data.description === 'string' ? data.description : '';
+    const seoTitle = typeof data.seoTitle === 'string' ? data.seoTitle : null;
+    const seoDescription = typeof data.seoDescription === 'string' ? data.seoDescription : null;
 
     return {
         title,
-        titlePlain: stripMarkdown(title),
+        titlePlain: seoTitle ?? stripMarkdown(title),
         date: normalizeDate(data.date),
         description,
-        descriptionPlain: stripMarkdown(description)
+        descriptionPlain: seoDescription ?? stripMarkdown(description)
     };
 }
 
