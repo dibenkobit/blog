@@ -70,32 +70,29 @@ export default function RootLayout({
                             </nav>
                         </header>
                         <main className='flex-1 max-w-xl mx-auto px-5 pt-12 pb-24 w-full'>{children}</main>
-                        <footer className='max-w-xl mx-auto px-5 pb-8 w-full'>
-                            <p className='text-[13px] text-foreground/20'>
-                                © {new Date().getFullYear()} Nikita Snetkov
-                                <span className='mx-2'>·</span>
-                                <a href='/feed.xml' className='transition-colors hover:text-foreground/40'>
-                                    RSS
-                                </a>
-                                <span className='mx-2'>·</span>
-                                <a
-                                    href='https://github.com/dibenkobit'
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className='transition-colors hover:text-foreground/40'
-                                >
-                                    GitHub
-                                </a>
-                                <span className='mx-2'>·</span>
-                                <a
-                                    href='https://x.com/dibenkobit'
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className='transition-colors hover:text-foreground/40'
-                                >
-                                    X
-                                </a>
-                            </p>
+                        <footer className='max-w-xl mx-auto px-5 pb-8 w-full flex items-center text-[13px] text-foreground/20'>
+                            <span>© {new Date().getFullYear()} Nikita Snetkov</span>
+                            <a href='/feed.xml' className='ml-auto transition-colors hover:text-foreground/40'>
+                                RSS
+                            </a>
+                            <span className='mx-2'>·</span>
+                            <a
+                                href='https://github.com/dibenkobit'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='transition-colors hover:text-foreground/40'
+                            >
+                                GitHub
+                            </a>
+                            <span className='mx-2'>·</span>
+                            <a
+                                href='https://x.com/dibenkobit'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='transition-colors hover:text-foreground/40'
+                            >
+                                X
+                            </a>
                         </footer>
                     </div>
                 </ThemeProvider>
