@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-export interface Post {
+interface Post {
     slug: string;
     title: string;
     date: string;
@@ -12,7 +12,7 @@ export interface Post {
     content: string;
 }
 
-export interface PostMeta {
+interface PostMeta {
     slug: string;
     title: string;
     date: string;
@@ -74,19 +74,7 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
     };
 }
 
-/**
- * Formats a date string for display (e.g., "Jan 30, 2026").
- */
-export function formatDate(dateString: string): string {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    if (Number.isNaN(date.getTime())) return dateString;
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
-}
+export { formatDate } from './date.utils';
 
 export function getAllPosts(): PostMeta[] {
     if (!fs.existsSync(postsDirectory)) {

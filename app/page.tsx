@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { formatDate, getAllPosts } from '@/lib/posts';
+import { formatDate } from '@/lib/date.utils';
+import { getAllPosts } from '@/lib/posts';
 
 export default function Home() {
     const posts = getAllPosts();

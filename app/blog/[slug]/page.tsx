@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
-import { formatDate, getAllSlugs, getPostBySlug } from '@/lib/posts';
+import { formatDate } from '@/lib/date.utils';
+import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 
 interface Props {
     params: Promise<{ slug: string }>;
