@@ -1,22 +1,27 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { stripMarkdown } from './markdown.utils';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
 interface Post {
     slug: string;
     title: string;
+    titlePlain: string;
     date: string;
     description: string;
+    descriptionPlain: string;
     content: string;
 }
 
 interface PostMeta {
     slug: string;
     title: string;
+    titlePlain: string;
     date: string;
     description: string;
+    descriptionPlain: string;
 }
 
 /**
@@ -67,10 +72,15 @@ function validateFrontmatter(data: Record<string, unknown>, slug: string): void 
 function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<PostMeta, 'slug'> {
     validateFrontmatter(data, slug);
 
+    const title = typeof data.title === 'string' ? data.title : slug;
+    const description = typeof data.description === 'string' ? data.description : '';
+
     return {
-        title: typeof data.title === 'string' ? data.title : slug,
+        title,
+        titlePlain: stripMarkdown(title),
         date: normalizeDate(data.date),
-        description: typeof data.description === 'string' ? data.description : ''
+        description,
+        descriptionPlain: stripMarkdown(description)
     };
 }
 

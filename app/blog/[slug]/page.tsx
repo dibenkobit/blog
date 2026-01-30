@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: post.title,
-        description: post.description,
+        title: post.titlePlain,
+        description: post.descriptionPlain,
         openGraph: {
-            title: post.title,
-            description: post.description,
+            title: post.titlePlain,
+            description: post.descriptionPlain,
             url: `https://dibenko.com/blog/${slug}`,
             type: 'article',
             publishedTime: post.date,
@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
         twitter: {
             card: 'summary',
-            title: post.title,
-            description: post.description
+            title: post.titlePlain,
+            description: post.descriptionPlain
         },
         alternates: {
             canonical: `https://dibenko.com/blog/${slug}`
@@ -59,8 +59,8 @@ export default async function PostPage({ params }: Props) {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.description,
+        headline: post.titlePlain,
+        description: post.descriptionPlain,
         datePublished: post.date,
         url: `https://dibenko.com/blog/${slug}`,
         author: {
