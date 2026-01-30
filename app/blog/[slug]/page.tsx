@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
+import { CodeBlock } from '@/components/code-block';
 import { formatDate } from '@/lib/date.utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 
@@ -59,7 +60,13 @@ export default async function PostPage({ params }: Props) {
                 <h1 className='text-3xl font-bold mt-2'>{post.title}</h1>
             </header>
             <div className='prose prose-neutral dark:prose-invert max-w-none'>
-                <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+                <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight]}
+                    components={{
+                        pre: ({ children, className }) => <CodeBlock className={className}>{children}</CodeBlock>
+                    }}
+                >
                     {post.content}
                 </Markdown>
             </div>
