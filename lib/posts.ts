@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { cache } from 'react';
 import { stripMarkdown } from './markdown.utils';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
@@ -88,7 +89,7 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
 
 export { formatDate } from './date.utils';
 
-export function getAllPosts(): PostMeta[] {
+export const getAllPosts = cache((): PostMeta[] => {
     if (!fs.existsSync(postsDirectory)) {
         return [];
     }
@@ -112,9 +113,9 @@ export function getAllPosts(): PostMeta[] {
         });
 
     return posts;
-}
+});
 
-export function getPostBySlug(slug: string): Post | null {
+export const getPostBySlug = cache((slug: string): Post | null => {
     const fullPath = path.join(postsDirectory, `${slug}.md`);
 
     if (!fs.existsSync(fullPath)) {
@@ -126,7 +127,7 @@ export function getPostBySlug(slug: string): Post | null {
     const frontmatter = parseFrontmatter(data, slug);
 
     return { slug, ...frontmatter, content };
-}
+});
 
 export function getAllSlugs(): string[] {
     if (!fs.existsSync(postsDirectory)) {
