@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { cache } from 'react';
-import { renderInlineMarkdown, stripMarkdown } from './markdown.utils';
+import { stripMarkdown } from './markdown.utils';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
@@ -10,7 +10,6 @@ interface Post {
     slug: string;
     title: string;
     titlePlain: string;
-    titleHtml: string;
     date: string;
     description: string;
     descriptionPlain: string;
@@ -21,7 +20,6 @@ interface PostMeta {
     slug: string;
     title: string;
     titlePlain: string;
-    titleHtml: string;
     date: string;
     description: string;
     descriptionPlain: string;
@@ -83,7 +81,6 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
     return {
         title,
         titlePlain: seoTitle ?? stripMarkdown(title),
-        titleHtml: renderInlineMarkdown(title),
         date: normalizeDate(data.date),
         description,
         descriptionPlain: seoDescription ?? stripMarkdown(description)
