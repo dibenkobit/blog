@@ -1,8 +1,8 @@
-import rehypeShiki from '@shikijs/rehype';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { formatDate, getAllSlugs, getPostBySlug } from '@/lib/posts';
 
@@ -24,8 +24,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${post.title} | dibenko`,
-        description: post.description
+        title: post.title,
+        description: post.description,
+        openGraph: {
+            title: post.title,
+            description: post.description,
+            type: 'article',
+            publishedTime: post.date
+        },
+        twitter: {
+            card: 'summary',
+            title: post.title,
+            description: post.description
+        }
     };
 }
 
@@ -47,21 +58,7 @@ export default async function PostPage({ params }: Props) {
                 <h1 className='text-3xl font-bold mt-2'>{post.title}</h1>
             </header>
             <div className='prose prose-neutral dark:prose-invert max-w-none'>
-                <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[
-                        [
-                            rehypeShiki,
-                            {
-                                themes: {
-                                    light: 'github-light',
-                                    dark: 'github-dark'
-                                },
-                                defaultColor: false
-                            }
-                        ]
-                    ]}
-                >
+                <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
                     {post.content}
                 </Markdown>
             </div>

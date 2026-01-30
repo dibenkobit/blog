@@ -17,8 +17,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'dibenko',
-    description: 'Personal blog'
+    title: {
+        default: 'dibenko',
+        template: '%s | dibenko'
+    },
+    description: 'Personal blog',
+    openGraph: {
+        title: 'dibenko',
+        description: 'Personal blog',
+        type: 'website',
+        locale: 'en_US',
+        siteName: 'dibenko'
+    },
+    twitter: {
+        card: 'summary',
+        title: 'dibenko',
+        description: 'Personal blog'
+    }
 };
 
 export default function RootLayout({
