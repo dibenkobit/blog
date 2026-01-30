@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Link from 'next/link';
 import { ModeToggle } from '@/components/mode-toggle';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
@@ -38,9 +39,9 @@ export default function RootLayout({
                     <div className='min-h-screen flex flex-col'>
                         <header className='border-b border-border'>
                             <div className='max-w-2xl mx-auto px-4 py-4 flex justify-between items-center'>
-                                <a href='/' className='font-medium text-lg'>
+                                <Link href='/' className='font-medium text-lg'>
                                     dibenko
-                                </a>
+                                </Link>
                                 <ModeToggle />
                             </div>
                         </header>
