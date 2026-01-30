@@ -126,187 +126,196 @@
 }
 
 /* Syntax highlighting - highlight.js github theme */
-.hljs {
+.prose pre {
+    background: transparent;
+    padding: 0;
+}
+
+.prose pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
     color: #24292e;
     background: #f6f8fa;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-meta .hljs-keyword,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable.language_ {
+.prose .hljs-doctag,
+.prose .hljs-keyword,
+.prose .hljs-meta .hljs-keyword,
+.prose .hljs-template-tag,
+.prose .hljs-template-variable,
+.prose .hljs-type,
+.prose .hljs-variable.language_ {
     color: #d73a49;
 }
 
-.hljs-title,
-.hljs-title.class_,
-.hljs-title.class_.inherited__,
-.hljs-title.function_ {
+.prose .hljs-title,
+.prose .hljs-title.class_,
+.prose .hljs-title.class_.inherited__,
+.prose .hljs-title.function_ {
     color: #6f42c1;
 }
 
-.hljs-attr,
-.hljs-attribute,
-.hljs-literal,
-.hljs-meta,
-.hljs-number,
-.hljs-operator,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-id,
-.hljs-variable {
+.prose .hljs-attr,
+.prose .hljs-attribute,
+.prose .hljs-literal,
+.prose .hljs-meta,
+.prose .hljs-number,
+.prose .hljs-operator,
+.prose .hljs-selector-attr,
+.prose .hljs-selector-class,
+.prose .hljs-selector-id,
+.prose .hljs-variable {
     color: #005cc5;
 }
 
-.hljs-string,
-.hljs-meta .hljs-string,
-.hljs-regexp {
+.prose .hljs-string,
+.prose .hljs-meta .hljs-string,
+.prose .hljs-regexp {
     color: #032f62;
 }
 
-.hljs-built_in,
-.hljs-symbol {
+.prose .hljs-built_in,
+.prose .hljs-symbol {
     color: #e36209;
 }
 
-.hljs-code,
-.hljs-comment,
-.hljs-formula {
+.prose .hljs-code,
+.prose .hljs-comment,
+.prose .hljs-formula {
     color: #6a737d;
 }
 
-.hljs-name,
-.hljs-quote,
-.hljs-selector-pseudo,
-.hljs-selector-tag {
+.prose .hljs-name,
+.prose .hljs-quote,
+.prose .hljs-selector-pseudo,
+.prose .hljs-selector-tag {
     color: #22863a;
 }
 
-.hljs-subst {
+.prose .hljs-subst {
     color: #24292e;
 }
 
-.hljs-section {
+.prose .hljs-section {
     color: #005cc5;
     font-weight: bold;
 }
 
-.hljs-bullet {
+.prose .hljs-bullet {
     color: #735c0f;
 }
 
-.hljs-emphasis {
+.prose .hljs-emphasis {
     color: #24292e;
     font-style: italic;
 }
 
-.hljs-strong {
+.prose .hljs-strong {
     color: #24292e;
     font-weight: bold;
 }
 
-.hljs-addition {
+.prose .hljs-addition {
     color: #22863a;
     background-color: #f0fff4;
 }
 
-.hljs-deletion {
+.prose .hljs-deletion {
     color: #b31d28;
     background-color: #ffeef0;
 }
 
 /* Dark mode */
-html.dark .hljs {
+html.dark .prose pre code.hljs {
     color: #c9d1d9;
     background: #161b22;
 }
 
-html.dark .hljs-doctag,
-html.dark .hljs-keyword,
-html.dark .hljs-meta .hljs-keyword,
-html.dark .hljs-template-tag,
-html.dark .hljs-template-variable,
-html.dark .hljs-type,
-html.dark .hljs-variable.language_ {
+html.dark .prose .hljs-doctag,
+html.dark .prose .hljs-keyword,
+html.dark .prose .hljs-meta .hljs-keyword,
+html.dark .prose .hljs-template-tag,
+html.dark .prose .hljs-template-variable,
+html.dark .prose .hljs-type,
+html.dark .prose .hljs-variable.language_ {
     color: #ff7b72;
 }
 
-html.dark .hljs-title,
-html.dark .hljs-title.class_,
-html.dark .hljs-title.class_.inherited__,
-html.dark .hljs-title.function_ {
+html.dark .prose .hljs-title,
+html.dark .prose .hljs-title.class_,
+html.dark .prose .hljs-title.class_.inherited__,
+html.dark .prose .hljs-title.function_ {
     color: #d2a8ff;
 }
 
-html.dark .hljs-attr,
-html.dark .hljs-attribute,
-html.dark .hljs-literal,
-html.dark .hljs-meta,
-html.dark .hljs-number,
-html.dark .hljs-operator,
-html.dark .hljs-selector-attr,
-html.dark .hljs-selector-class,
-html.dark .hljs-selector-id,
-html.dark .hljs-variable {
+html.dark .prose .hljs-attr,
+html.dark .prose .hljs-attribute,
+html.dark .prose .hljs-literal,
+html.dark .prose .hljs-meta,
+html.dark .prose .hljs-number,
+html.dark .prose .hljs-operator,
+html.dark .prose .hljs-selector-attr,
+html.dark .prose .hljs-selector-class,
+html.dark .prose .hljs-selector-id,
+html.dark .prose .hljs-variable {
     color: #79c0ff;
 }
 
-html.dark .hljs-string,
-html.dark .hljs-meta .hljs-string,
-html.dark .hljs-regexp {
+html.dark .prose .hljs-string,
+html.dark .prose .hljs-meta .hljs-string,
+html.dark .prose .hljs-regexp {
     color: #a5d6ff;
 }
 
-html.dark .hljs-built_in,
-html.dark .hljs-symbol {
+html.dark .prose .hljs-built_in,
+html.dark .prose .hljs-symbol {
     color: #ffa657;
 }
 
-html.dark .hljs-code,
-html.dark .hljs-comment,
-html.dark .hljs-formula {
+html.dark .prose .hljs-code,
+html.dark .prose .hljs-comment,
+html.dark .prose .hljs-formula {
     color: #8b949e;
 }
 
-html.dark .hljs-name,
-html.dark .hljs-quote,
-html.dark .hljs-selector-pseudo,
-html.dark .hljs-selector-tag {
+html.dark .prose .hljs-name,
+html.dark .prose .hljs-quote,
+html.dark .prose .hljs-selector-pseudo,
+html.dark .prose .hljs-selector-tag {
     color: #7ee787;
 }
 
-html.dark .hljs-subst {
+html.dark .prose .hljs-subst {
     color: #c9d1d9;
 }
 
-html.dark .hljs-section {
+html.dark .prose .hljs-section {
     color: #79c0ff;
     font-weight: bold;
 }
 
-html.dark .hljs-bullet {
+html.dark .prose .hljs-bullet {
     color: #f2cc60;
 }
 
-html.dark .hljs-emphasis {
+html.dark .prose .hljs-emphasis {
     color: #c9d1d9;
     font-style: italic;
 }
 
-html.dark .hljs-strong {
+html.dark .prose .hljs-strong {
     color: #c9d1d9;
     font-weight: bold;
 }
 
-html.dark .hljs-addition {
+html.dark .prose .hljs-addition {
     color: #aff5b4;
     background-color: #033a16;
 }
 
-html.dark .hljs-deletion {
+html.dark .prose .hljs-deletion {
     color: #ffdcd7;
     background-color: #67060c;
 }
