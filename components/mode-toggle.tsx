@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 const themes = ['light', 'dark', 'system'] as const;
 type Theme = (typeof themes)[number];
 
-// Определяем какая будет реальная тема после переключения
+// Determines the actual theme after switching (resolves 'system' to light/dark)
 const getResolvedTheme = (themeName: Theme): 'light' | 'dark' => {
     if (themeName === 'system') {
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -33,7 +33,7 @@ export function ModeToggle() {
         const currentResolved = resolvedTheme;
         const newResolved = getResolvedTheme(newTheme);
 
-        // Если визуально тема не меняется — без анимации
+        // Skip animation if the visual theme doesn't change
         if (!document.startViewTransition || currentResolved === newResolved) {
             setTheme(newTheme);
             return;
