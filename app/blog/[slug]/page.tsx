@@ -14,7 +14,7 @@ interface Props {
     params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
     const slugs = getAllSlugs();
     return slugs.map((slug) => ({ slug }));
 }
