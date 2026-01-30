@@ -6,6 +6,7 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '@/components/code-block';
 import { InlineMarkdown } from '@/components/inline-markdown';
+import { AUTHOR_NAME, SITE_URL } from '@/lib/constants';
 import { formatDate } from '@/lib/date.utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 
@@ -32,10 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title: post.titlePlain,
             description: post.descriptionPlain,
-            url: `https://dibenko.com/blog/${slug}`,
+            url: `${SITE_URL}/blog/${slug}`,
             type: 'article',
             publishedTime: post.date,
-            authors: ['Nikita Snetkov']
+            authors: [AUTHOR_NAME]
         },
         twitter: {
             card: 'summary',
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: post.descriptionPlain
         },
         alternates: {
-            canonical: `https://dibenko.com/blog/${slug}`
+            canonical: `${SITE_URL}/blog/${slug}`
         }
     };
 }
@@ -62,10 +63,10 @@ export default async function PostPage({ params }: Props) {
         headline: post.titlePlain,
         description: post.descriptionPlain,
         datePublished: post.date,
-        url: `https://dibenko.com/blog/${slug}`,
+        url: `${SITE_URL}/blog/${slug}`,
         author: {
             '@type': 'Person',
-            name: 'Nikita Snetkov'
+            name: AUTHOR_NAME
         }
     };
 

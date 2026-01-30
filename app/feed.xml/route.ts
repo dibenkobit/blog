@@ -1,6 +1,5 @@
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
 import { getAllPosts } from '@/lib/posts';
-
-const SITE_URL = 'https://dibenko.com';
 
 export function GET() {
     const posts = getAllPosts();
@@ -21,9 +20,9 @@ export function GET() {
     const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dibenko</title>
+    <title>${SITE_NAME}</title>
     <link>${SITE_URL}</link>
-    <description>Thoughts on software engineering, technology, and building products.</description>
+    <description>${SITE_DESCRIPTION}</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>${itemsXml}

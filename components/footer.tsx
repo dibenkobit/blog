@@ -1,3 +1,5 @@
+import { AUTHOR_NAME } from '@/lib/constants';
+
 const socialLinks = [
     { href: '/feed.xml', label: 'RSS', external: false },
     { href: 'https://github.com/dibenkobit', label: 'GitHub', external: true },
@@ -9,7 +11,9 @@ export function Footer() {
 
     return (
         <footer className='max-w-xl mx-auto px-5 pb-8 w-full flex items-center text-[13px] text-foreground/20'>
-            <span>&copy; {currentYear} Nikita Snetkov</span>
+            <span>
+                &copy; {currentYear} {AUTHOR_NAME}
+            </span>
             <nav className='ml-auto flex items-center'>
                 {socialLinks.map((link, index) => (
                     <span key={link.href} className='contents'>

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
 import './globals.css';
 
 const geistSans = Geist({
@@ -17,28 +18,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://dibenko.com'),
+    metadataBase: new URL(SITE_URL),
     title: {
-        default: 'dibenko',
-        template: '%s | dibenko'
+        default: SITE_NAME,
+        template: `%s | ${SITE_NAME}`
     },
-    description: 'Thoughts on software engineering, technology, and building products.',
-    authors: [{ name: 'Nikita Snetkov' }],
+    description: SITE_DESCRIPTION,
+    authors: [{ name: AUTHOR_NAME }],
     openGraph: {
-        title: 'dibenko',
-        description: 'Thoughts on software engineering, technology, and building products.',
-        url: 'https://dibenko.com',
+        title: SITE_NAME,
+        description: SITE_DESCRIPTION,
+        url: SITE_URL,
         type: 'website',
         locale: 'en_US',
-        siteName: 'dibenko'
+        siteName: SITE_NAME
     },
     twitter: {
         card: 'summary',
-        title: 'dibenko',
-        description: 'Thoughts on software engineering, technology, and building products.'
+        title: SITE_NAME,
+        description: SITE_DESCRIPTION
     },
     alternates: {
-        canonical: 'https://dibenko.com'
+        canonical: SITE_URL
     }
 };
 
