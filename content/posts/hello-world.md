@@ -15,3 +15,7 @@ I'll be writing about:
 - Random thoughts
 
 Stay tuned.
+
+```typescript
+const abc = 123;
+```
