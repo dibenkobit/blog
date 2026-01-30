@@ -1,7 +1,7 @@
 'use client';
 
 import { Check, Copy } from 'lucide-react';
-import { type ReactNode, useCallback, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -13,6 +13,13 @@ interface CodeBlockProps {
 export function CodeBlock({ children, className }: CodeBlockProps) {
     const [copied, setCopied] = useState(false);
     const preRef = useRef<HTMLPreElement>(null);
+    const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) clearTimeout(timerRef.current);
+        };
+    }, []);
 
     const handleCopy = useCallback(async () => {
         const text = preRef.current?.textContent ?? '';
@@ -21,7 +28,8 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
         try {
             await navigator.clipboard.writeText(text);
             setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+            if (timerRef.current) clearTimeout(timerRef.current);
+            timerRef.current = setTimeout(() => setCopied(false), 2000);
         } catch (err) {
             console.error('Failed to copy code:', err);
         }
