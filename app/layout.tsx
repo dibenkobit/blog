@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ModeToggle } from '@/components/mode-toggle';
@@ -46,6 +47,7 @@ export default function RootLayout({
                         <main className='flex-1 max-w-2xl mx-auto px-4 py-8 w-full'>{children}</main>
                     </div>
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );
