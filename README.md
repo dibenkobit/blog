@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dibenko.com
 
-## Getting Started
+Personal blog of Nikita Snetkov.
 
-First, run the development server:
+## Stack
+
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- Biome (linting/formatting)
+- Vercel (hosting)
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run dev          # Start dev server
+bun run build        # Production build
+bun run check:fix    # Lint and format (run before commits)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content
 
-## Learn More
+Posts live in `content/posts/` as markdown files. Filename becomes the URL slug:
 
-To learn more about Next.js, take a look at the following resources:
+`hello-world.md` → `dibenko.com/blog/hello-world`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Filename rules: lowercase, hyphens for spaces, no special characters. Filename is used as-is in the URL.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontmatter
 
-## Deploy on Vercel
+```md
+---
+title: "Post Title"
+date: "2026-01-30"
+description: "Brief description"
+---
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All three fields are required.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Inline markdown** works in `title` and `description`:
+
+```md
+title: "Why `useState` is *actually* good"
+description: "A defense of React's **most misunderstood** hook"
+```
+
+**Date** uses ISO format (YYYY-MM-DD). Displayed as "Jan 30, 2026" on the site.
