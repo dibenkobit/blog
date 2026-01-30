@@ -5,6 +5,8 @@ import { cache } from 'react';
 import { stripMarkdown } from './markdown.utils';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
+const draftsDirectory = path.join(process.cwd(), 'content/drafts');
+const isDev = process.env.NODE_ENV === 'development';
 
 interface Post {
     slug: string;
@@ -89,36 +91,54 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
 
 export { formatDate } from './date.utils';
 
-export const getAllPosts = cache((): PostMeta[] => {
-    if (!fs.existsSync(postsDirectory)) {
+function getPostsFromDirectory(directory: string): PostMeta[] {
+    if (!fs.existsSync(directory)) {
         return [];
     }
 
-    const fileNames = fs.readdirSync(postsDirectory);
-    const posts = fileNames
+    return fs
+        .readdirSync(directory)
         .filter((name) => name.endsWith('.md'))
         .map((fileName) => {
             const slug = fileName.replace(/\.md$/, '');
-            const fullPath = path.join(postsDirectory, fileName);
+            const fullPath = path.join(directory, fileName);
             const fileContents = fs.readFileSync(fullPath, 'utf8');
             const { data } = matter(fileContents);
             const frontmatter = parseFrontmatter(data, slug);
 
             return { slug, ...frontmatter };
-        })
-        .sort((a, b) => {
-            const dateA = a.date ? new Date(a.date).getTime() : 0;
-            const dateB = b.date ? new Date(b.date).getTime() : 0;
-            return dateB - dateA;
         });
+}
 
-    return posts;
+export const getAllPosts = cache((): PostMeta[] => {
+    const posts = getPostsFromDirectory(postsDirectory);
+
+    if (isDev) {
+        const postSlugs = new Set(posts.map((p) => p.slug));
+        const drafts = getPostsFromDirectory(draftsDirectory).filter((d) => !postSlugs.has(d.slug));
+        posts.push(...drafts);
+    }
+
+    return posts.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+    });
 });
 
 export const getPostBySlug = cache((slug: string): Post | null => {
-    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const postPath = path.join(postsDirectory, `${slug}.md`);
+    const draftPath = path.join(draftsDirectory, `${slug}.md`);
 
-    if (!fs.existsSync(fullPath)) {
+    let fullPath: string | null = null;
+
+    if (fs.existsSync(postPath)) {
+        fullPath = postPath;
+    } else if (isDev && fs.existsSync(draftPath)) {
+        fullPath = draftPath;
+    }
+
+    if (!fullPath) {
         return null;
     }
 
@@ -129,13 +149,25 @@ export const getPostBySlug = cache((slug: string): Post | null => {
     return { slug, ...frontmatter, content };
 });
 
-export function getAllSlugs(): string[] {
-    if (!fs.existsSync(postsDirectory)) {
+function getSlugsFromDirectory(directory: string): string[] {
+    if (!fs.existsSync(directory)) {
         return [];
     }
 
     return fs
-        .readdirSync(postsDirectory)
+        .readdirSync(directory)
         .filter((name) => name.endsWith('.md'))
         .map((name) => name.replace(/\.md$/, ''));
+}
+
+export function getAllSlugs(): string[] {
+    const slugs = new Set(getSlugsFromDirectory(postsDirectory));
+
+    if (isDev) {
+        for (const slug of getSlugsFromDirectory(draftsDirectory)) {
+            slugs.add(slug);
+        }
+    }
+
+    return [...slugs];
 }

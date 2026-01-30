@@ -64,3 +64,21 @@ seoTitle: "Valkey: the open-source Redis fork explained"
 ```
 
 **Date** uses ISO format (YYYY-MM-DD). Displayed as "Jan 30, 2026" on the site.
+
+### Drafts
+
+Drafts live in `content/drafts/` and render only in development mode.
+
+```
+content/
+├── posts/    # Published (always included)
+└── drafts/   # Dev-only (git-ignored)
+```
+
+**Behavior:**
+- `bun dev` — shows posts + drafts
+- `bun build` — shows posts only
+- Same filename in both folders — post wins (no duplicates)
+- Sorted by date alongside regular posts
+
+**Workflow:** create in `drafts/`, preview locally, move to `posts/` when ready.
