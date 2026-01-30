@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { InlineMarkdown } from '@/components/inline-markdown';
 import { formatDate } from '@/lib/date.utils';
 import { getAllPosts } from '@/lib/posts';
 
@@ -22,9 +21,11 @@ export default function Home() {
                                 <time className='text-[13px] tabular-nums text-foreground/30 shrink-0'>
                                     {formatDate(post.date)}
                                 </time>
-                                <span className='text-[15px] text-foreground/80 group-hover:text-foreground transition-colors duration-200'>
-                                    <InlineMarkdown>{post.title}</InlineMarkdown>
-                                </span>
+                                <span
+                                    className='text-[15px] text-foreground/80 group-hover:text-foreground transition-colors duration-200'
+                                    // biome-ignore lint/security/noDangerouslySetInnerHtml: Pre-rendered from trusted local markdown
+                                    dangerouslySetInnerHTML={{ __html: post.titleHtml }}
+                                />
                             </Link>
                         </li>
                     ))}

@@ -5,7 +5,6 @@ import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '@/components/code-block';
-import { InlineMarkdown } from '@/components/inline-markdown';
 import { AUTHOR_NAME, SITE_URL } from '@/lib/constants';
 import { formatDate } from '@/lib/date.utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
@@ -88,9 +87,11 @@ export default async function PostPage({ params }: Props) {
                     <time className='block text-[13px] text-foreground/30 mt-8 tabular-nums'>
                         {formatDate(post.date)}
                     </time>
-                    <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-1.5'>
-                        <InlineMarkdown>{post.title}</InlineMarkdown>
-                    </h1>
+                    <h1
+                        className='text-2xl font-medium tracking-tight text-foreground/90 mt-1.5'
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: Pre-rendered from trusted local markdown
+                        dangerouslySetInnerHTML={{ __html: post.titleHtml }}
+                    />
                 </header>
                 <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-pre:bg-transparent'>
                     <Markdown
