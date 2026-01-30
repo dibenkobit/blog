@@ -1,8 +1,8 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Link from 'next/link';
-import { ModeToggle } from '@/components/mode-toggle';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
@@ -58,42 +58,9 @@ export default function RootLayout({
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
                     <div className='min-h-screen flex flex-col'>
-                        <header>
-                            <nav className='max-w-xl mx-auto px-5 py-6 flex justify-between items-center'>
-                                <Link
-                                    href='/'
-                                    className='text-[15px] font-medium text-foreground/90 transition-opacity duration-200 hover:opacity-60'
-                                >
-                                    dibenko
-                                </Link>
-                                <ModeToggle />
-                            </nav>
-                        </header>
+                        <Header />
                         <main className='flex-1 max-w-xl mx-auto px-5 pt-12 pb-24 w-full'>{children}</main>
-                        <footer className='max-w-xl mx-auto px-5 pb-8 w-full flex items-center text-[13px] text-foreground/20'>
-                            <span>© {new Date().getFullYear()} Nikita Snetkov</span>
-                            <a href='/feed.xml' className='ml-auto transition-colors hover:text-foreground/40'>
-                                RSS
-                            </a>
-                            <span className='mx-2'>·</span>
-                            <a
-                                href='https://github.com/dibenkobit'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                                className='transition-colors hover:text-foreground/40'
-                            >
-                                GitHub
-                            </a>
-                            <span className='mx-2'>·</span>
-                            <a
-                                href='https://x.com/dibenkobit'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                                className='transition-colors hover:text-foreground/40'
-                            >
-                                X
-                            </a>
-                        </footer>
+                        <Footer />
                     </div>
                 </ThemeProvider>
                 <Analytics />
