@@ -7,30 +7,28 @@ export default function Home() {
     const posts = getAllPosts();
 
     return (
-        <div>
+        <section>
             {posts.length === 0 ? (
-                <p className='text-muted-foreground'>No posts yet.</p>
+                <p className='text-foreground/40'>No posts yet.</p>
             ) : (
-                <ul className='space-y-8'>
+                <ul className='flex flex-col gap-1'>
                     {posts.map((post) => (
                         <li key={post.slug}>
-                            <Link href={`/blog/${post.slug}`} className='group block'>
-                                <article>
-                                    <time className='text-sm text-muted-foreground'>{formatDate(post.date)}</time>
-                                    <h2 className='text-xl font-medium mt-1 group-hover:underline'>
-                                        <InlineMarkdown>{post.title}</InlineMarkdown>
-                                    </h2>
-                                    {post.description && (
-                                        <p className='text-muted-foreground mt-2'>
-                                            <InlineMarkdown>{post.description}</InlineMarkdown>
-                                        </p>
-                                    )}
-                                </article>
+                            <Link
+                                href={`/blog/${post.slug}`}
+                                className='group flex items-baseline gap-4 py-2 -mx-2 px-2 rounded transition-colors duration-200 hover:bg-foreground/[0.03]'
+                            >
+                                <time className='text-[13px] tabular-nums text-foreground/30 shrink-0'>
+                                    {formatDate(post.date)}
+                                </time>
+                                <span className='text-[15px] text-foreground/90 group-hover:text-foreground transition-colors duration-200'>
+                                    <InlineMarkdown>{post.title}</InlineMarkdown>
+                                </span>
                             </Link>
                         </li>
                     ))}
                 </ul>
             )}
-        </div>
+        </section>
     );
 }

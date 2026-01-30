@@ -52,15 +52,18 @@ export default function RootLayout({
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
                     <div className='min-h-screen flex flex-col'>
-                        <header className='border-b border-border'>
-                            <div className='max-w-2xl mx-auto px-4 py-4 flex justify-between items-center'>
-                                <Link href='/' className='font-medium text-lg'>
+                        <header>
+                            <nav className='max-w-xl mx-auto px-5 pt-8 pb-4 flex justify-between items-center'>
+                                <Link
+                                    href='/'
+                                    className='text-[15px] font-medium text-foreground/90 transition-opacity duration-200 hover:opacity-60'
+                                >
                                     dibenko
                                 </Link>
                                 <ModeToggle />
-                            </div>
+                            </nav>
                         </header>
-                        <main className='flex-1 max-w-2xl mx-auto px-4 py-8 w-full'>{children}</main>
+                        <main className='flex-1 max-w-xl mx-auto px-5 py-16 w-full'>{children}</main>
                     </div>
                 </ThemeProvider>
                 <Analytics />
