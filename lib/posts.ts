@@ -41,9 +41,32 @@ function normalizeDate(value: unknown): string {
 }
 
 /**
+ * Validates frontmatter and logs warnings for missing fields.
+ */
+function validateFrontmatter(data: Record<string, unknown>, slug: string): void {
+    const missing: string[] = [];
+
+    if (typeof data.title !== 'string' || !data.title.trim()) {
+        missing.push('title');
+    }
+    if (!data.date) {
+        missing.push('date');
+    }
+    if (typeof data.description !== 'string' || !data.description.trim()) {
+        missing.push('description');
+    }
+
+    if (missing.length > 0 && process.env.NODE_ENV === 'development') {
+        console.warn(`[posts] "${slug}.md" is missing frontmatter: ${missing.join(', ')}`);
+    }
+}
+
+/**
  * Parses raw frontmatter data into typed PostMeta fields.
  */
 function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<PostMeta, 'slug'> {
+    validateFrontmatter(data, slug);
+
     return {
         title: typeof data.title === 'string' ? data.title : slug,
         date: normalizeDate(data.date),
