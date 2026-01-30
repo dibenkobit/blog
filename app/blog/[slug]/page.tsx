@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '@/components/code-block';
+import { InlineMarkdown } from '@/components/inline-markdown';
 import { formatDate } from '@/lib/date.utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 
@@ -57,7 +58,9 @@ export default async function PostPage({ params }: Props) {
                     &larr; Back
                 </Link>
                 <time className='block text-sm text-muted-foreground mt-4'>{formatDate(post.date)}</time>
-                <h1 className='text-3xl font-bold mt-2'>{post.title}</h1>
+                <h1 className='text-3xl font-bold mt-2'>
+                    <InlineMarkdown>{post.title}</InlineMarkdown>
+                </h1>
             </header>
             <div className='prose prose-neutral dark:prose-invert max-w-none'>
                 <Markdown
