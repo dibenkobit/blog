@@ -19,6 +19,52 @@ export interface PostMeta {
     description: string;
 }
 
+/**
+ * Normalizes a date value from frontmatter to ISO string (YYYY-MM-DD).
+ * YAML can parse dates as either Date objects (unquoted) or strings (quoted).
+ */
+function normalizeDate(value: unknown): string {
+    if (!value) return '';
+
+    if (value instanceof Date) {
+        if (Number.isNaN(value.getTime())) return '';
+        return value.toISOString().split('T')[0];
+    }
+
+    if (typeof value === 'string') {
+        const parsed = new Date(value);
+        if (Number.isNaN(parsed.getTime())) return '';
+        return parsed.toISOString().split('T')[0];
+    }
+
+    return '';
+}
+
+/**
+ * Parses raw frontmatter data into typed PostMeta fields.
+ */
+function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<PostMeta, 'slug'> {
+    return {
+        title: typeof data.title === 'string' ? data.title : slug,
+        date: normalizeDate(data.date),
+        description: typeof data.description === 'string' ? data.description : ''
+    };
+}
+
+/**
+ * Formats a date string for display (e.g., "Jan 30, 2026").
+ */
+export function formatDate(dateString: string): string {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return dateString;
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
 export function getAllPosts(): PostMeta[] {
     if (!fs.existsSync(postsDirectory)) {
         return [];
@@ -32,15 +78,15 @@ export function getAllPosts(): PostMeta[] {
             const fullPath = path.join(postsDirectory, fileName);
             const fileContents = fs.readFileSync(fullPath, 'utf8');
             const { data } = matter(fileContents);
+            const frontmatter = parseFrontmatter(data, slug);
 
-            return {
-                slug,
-                title: data.title || slug,
-                date: data.date || '',
-                description: data.description || ''
-            };
+            return { slug, ...frontmatter };
         })
-        .sort((a, b) => (a.date > b.date ? -1 : 1));
+        .sort((a, b) => {
+            const dateA = a.date ? new Date(a.date).getTime() : 0;
+            const dateB = b.date ? new Date(b.date).getTime() : 0;
+            return dateB - dateA;
+        });
 
     return posts;
 }
@@ -54,14 +100,9 @@ export function getPostBySlug(slug: string): Post | null {
 
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
+    const frontmatter = parseFrontmatter(data, slug);
 
-    return {
-        slug,
-        title: data.title || slug,
-        date: data.date || '',
-        description: data.description || '',
-        content
-    };
+    return { slug, ...frontmatter, content };
 }
 
 export function getAllSlugs(): string[] {

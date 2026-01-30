@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { formatDate, getAllPosts } from '@/lib/posts';
 
 export default function Home() {
     const posts = getAllPosts();
@@ -14,7 +14,7 @@ export default function Home() {
                         <li key={post.slug}>
                             <Link href={`/blog/${post.slug}`} className='group block'>
                                 <article>
-                                    <time className='text-sm text-muted-foreground'>{post.date}</time>
+                                    <time className='text-sm text-muted-foreground'>{formatDate(post.date)}</time>
                                     <h2 className='text-xl font-medium mt-1 group-hover:underline'>{post.title}</h2>
                                     {post.description && (
                                         <p className='text-muted-foreground mt-2'>{post.description}</p>
