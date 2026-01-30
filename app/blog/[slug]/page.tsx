@@ -32,13 +32,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title: post.title,
             description: post.description,
+            url: `https://dibenko.com/blog/${slug}`,
             type: 'article',
-            publishedTime: post.date
+            publishedTime: post.date,
+            authors: ['dibenko']
         },
         twitter: {
             card: 'summary',
             title: post.title,
             description: post.description
+        },
+        alternates: {
+            canonical: `https://dibenko.com/blog/${slug}`
         }
     };
 }
@@ -51,31 +56,53 @@ export default async function PostPage({ params }: Props) {
         notFound();
     }
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        url: `https://dibenko.com/blog/${slug}`,
+        author: {
+            '@type': 'Person',
+            name: 'dibenko'
+        }
+    };
+
     return (
-        <article>
-            <header className='mb-12'>
-                <Link
-                    href='/'
-                    className='text-[13px] text-foreground/40 transition-colors duration-200 hover:text-foreground/70'
-                >
-                    ← Back
-                </Link>
-                <time className='block text-[13px] text-foreground/30 mt-10 tabular-nums'>{formatDate(post.date)}</time>
-                <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-2'>
-                    <InlineMarkdown>{post.title}</InlineMarkdown>
-                </h1>
-            </header>
-            <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-pre:bg-transparent'>
-                <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
-                    components={{
-                        pre: ({ children, className }) => <CodeBlock className={className}>{children}</CodeBlock>
-                    }}
-                >
-                    {post.content}
-                </Markdown>
-            </div>
-        </article>
+        <>
+            <script
+                type='application/ld+json'
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data requires innerHTML
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <article>
+                <header className='mb-12'>
+                    <Link
+                        href='/'
+                        className='text-[13px] text-foreground/40 transition-colors duration-200 hover:text-foreground/70'
+                    >
+                        ← Back
+                    </Link>
+                    <time className='block text-[13px] text-foreground/30 mt-10 tabular-nums'>
+                        {formatDate(post.date)}
+                    </time>
+                    <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-2'>
+                        <InlineMarkdown>{post.title}</InlineMarkdown>
+                    </h1>
+                </header>
+                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-pre:bg-transparent'>
+                    <Markdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeHighlight]}
+                        components={{
+                            pre: ({ children, className }) => <CodeBlock className={className}>{children}</CodeBlock>
+                        }}
+                    >
+                        {post.content}
+                    </Markdown>
+                </div>
+            </article>
+        </>
     );
 }

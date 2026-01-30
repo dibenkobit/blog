@@ -17,14 +17,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://dibenko.com'),
     title: {
         default: 'dibenko',
         template: '%s | dibenko'
     },
-    description: 'Personal blog',
+    description: 'Thoughts on software engineering, technology, and building products.',
+    authors: [{ name: 'dibenko' }],
     openGraph: {
         title: 'dibenko',
-        description: 'Personal blog',
+        description: 'Thoughts on software engineering, technology, and building products.',
+        url: 'https://dibenko.com',
         type: 'website',
         locale: 'en_US',
         siteName: 'dibenko'
@@ -32,7 +35,10 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary',
         title: 'dibenko',
-        description: 'Personal blog'
+        description: 'Thoughts on software engineering, technology, and building products.'
+    },
+    alternates: {
+        canonical: 'https://dibenko.com'
     }
 };
 
