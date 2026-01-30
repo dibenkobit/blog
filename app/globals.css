@@ -338,13 +338,13 @@ html.dark .prose .hljs-deletion {
 
 ::view-transition-new(root) {
     mask: url("https://media.tenor.com/cyORI7kwShQAAAAi/shigure-ui-dance.gif") center / 0 no-repeat;
-    animation: theme-reveal 3s;
+    animation: theme-reveal 2s;
     animation-fill-mode: both;
 }
 
 ::view-transition-old(root),
 .dark::view-transition-old(root) {
-    animation: theme-reveal 3s;
+    animation: theme-reveal 2s;
     animation-fill-mode: both;
 }
 
