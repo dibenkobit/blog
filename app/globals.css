@@ -330,3 +330,44 @@ html.dark .prose .hljs-deletion {
     color: #ffdcd7;
     background-color: #67060c;
 }
+
+/* View Transitions для переключения темы с гифкой */
+::view-transition-group(root) {
+    animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+::view-transition-new(root) {
+    mask: url("https://media.tenor.com/cyORI7kwShQAAAAi/shigure-ui-dance.gif") center / 0 no-repeat;
+    animation: theme-reveal 3s;
+    animation-fill-mode: both;
+}
+
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+    animation: theme-reveal 3s;
+    animation-fill-mode: both;
+}
+
+@keyframes theme-reveal {
+    0% {
+        mask-size: 0;
+    }
+    10% {
+        mask-size: 50vmax;
+    }
+    90% {
+        mask-size: 50vmax;
+    }
+    100% {
+        mask-size: 2000vmax;
+    }
+}
+
+/* Отключаем для пользователей с reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none;
+    }
+}

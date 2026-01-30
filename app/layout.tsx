@@ -56,7 +56,7 @@ export default function RootLayout({
                 <link rel='manifest' href='/site.webmanifest' />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+                <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
                     <div className='min-h-screen flex flex-col'>
                         <header>
                             <nav className='max-w-xl mx-auto px-5 py-6 flex justify-between items-center'>

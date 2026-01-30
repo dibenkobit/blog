@@ -3,13 +3,22 @@
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useCallback, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { Button } from '@/components/ui/button';
 
 const themes = ['light', 'dark', 'system'] as const;
 type Theme = (typeof themes)[number];
 
+// Определяем какая будет реальная тема после переключения
+const getResolvedTheme = (themeName: Theme): 'light' | 'dark' => {
+    if (themeName === 'system') {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return themeName;
+};
+
 export function ModeToggle() {
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -19,8 +28,23 @@ export function ModeToggle() {
     const cycleTheme = useCallback(() => {
         const currentIndex = themes.indexOf((theme as Theme) ?? 'system');
         const nextIndex = (currentIndex + 1) % themes.length;
-        setTheme(themes[nextIndex]);
-    }, [theme, setTheme]);
+        const newTheme = themes[nextIndex];
+
+        const currentResolved = resolvedTheme;
+        const newResolved = getResolvedTheme(newTheme);
+
+        // Если визуально тема не меняется — без анимации
+        if (!document.startViewTransition || currentResolved === newResolved) {
+            setTheme(newTheme);
+            return;
+        }
+
+        document.startViewTransition(() => {
+            flushSync(() => {
+                setTheme(newTheme);
+            });
+        });
+    }, [theme, setTheme, resolvedTheme]);
 
     if (!mounted) {
         return (
