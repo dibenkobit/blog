@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         template: '%s | dibenko'
     },
     description: 'Thoughts on software engineering, technology, and building products.',
-    authors: [{ name: 'dibenko' }],
+    authors: [{ name: 'Nikita Snetkov' }],
     openGraph: {
         title: 'dibenko',
         description: 'Thoughts on software engineering, technology, and building products.',

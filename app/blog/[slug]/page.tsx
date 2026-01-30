@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             url: `https://dibenko.com/blog/${slug}`,
             type: 'article',
             publishedTime: post.date,
-            authors: ['dibenko']
+            authors: ['Nikita Snetkov']
         },
         twitter: {
             card: 'summary',
@@ -65,7 +65,7 @@ export default async function PostPage({ params }: Props) {
         url: `https://dibenko.com/blog/${slug}`,
         author: {
             '@type': 'Person',
-            name: 'dibenko'
+            name: 'Nikita Snetkov'
         }
     };
 
