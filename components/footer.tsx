@@ -1,5 +1,3 @@
-const CURRENT_YEAR = new Date().getFullYear();
-
 const socialLinks = [
     { href: '/feed.xml', label: 'RSS', external: false },
     { href: 'https://github.com/dibenkobit', label: 'GitHub', external: true },
@@ -7,9 +5,11 @@ const socialLinks = [
 ] as const;
 
 export function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className='max-w-xl mx-auto px-5 pb-8 w-full flex items-center text-[13px] text-foreground/20'>
-            <span>&copy; {CURRENT_YEAR} Nikita Snetkov</span>
+            <span>&copy; {currentYear} Nikita Snetkov</span>
             <nav className='ml-auto flex items-center'>
                 {socialLinks.map((link, index) => (
                     <span key={link.href} className='contents'>
