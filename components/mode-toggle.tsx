@@ -1,37 +1,51 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
+import { useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+
+const themes = ['light', 'dark', 'system'] as const;
+type Theme = (typeof themes)[number];
 
 export function ModeToggle() {
-    const { setTheme } = useTheme();
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const cycleTheme = useCallback(() => {
+        const currentIndex = themes.indexOf((theme as Theme) ?? 'system');
+        const nextIndex = (currentIndex + 1) % themes.length;
+        setTheme(themes[nextIndex]);
+    }, [theme, setTheme]);
+
+    if (!mounted) {
+        return (
+            <Button
+                variant='ghost'
+                size='icon'
+                className='h-8 w-8 text-foreground/40 hover:text-foreground/70 hover:bg-transparent'
+                aria-label='Toggle theme'
+            >
+                <Sun className='h-4 w-4' />
+            </Button>
+        );
+    }
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button
-                    variant='ghost'
-                    size='icon'
-                    className='h-8 w-8 text-foreground/50 hover:text-foreground/80 hover:bg-transparent'
-                >
-                    <Sun className='h-4 w-4 scale-100 rotate-0 transition-all duration-200 dark:scale-0 dark:-rotate-90' />
-                    <Moon className='absolute h-4 w-4 scale-0 rotate-90 transition-all duration-200 dark:scale-100 dark:rotate-0' />
-                    <span className='sr-only'>Toggle theme</span>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-                <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <Button
+            variant='ghost'
+            size='icon'
+            className='h-8 w-8 text-foreground/40 hover:text-foreground/70 hover:bg-transparent transition-colors duration-200'
+            onClick={cycleTheme}
+            aria-label={`Current theme: ${theme}. Click to cycle.`}
+        >
+            {theme === 'light' && <Sun className='h-4 w-4' />}
+            {theme === 'dark' && <Moon className='h-4 w-4' />}
+            {theme === 'system' && <Monitor className='h-4 w-4' />}
+        </Button>
     );
 }

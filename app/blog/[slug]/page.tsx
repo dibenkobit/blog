@@ -77,17 +77,17 @@ export default async function PostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <article>
-                <header className='mb-12'>
+                <header className='mb-16'>
                     <Link
                         href='/'
                         className='text-[13px] text-foreground/40 transition-colors duration-200 hover:text-foreground/70'
                     >
                         ← Back
                     </Link>
-                    <time className='block text-[13px] text-foreground/30 mt-10 tabular-nums'>
+                    <time className='block text-[13px] text-foreground/30 mt-8 tabular-nums'>
                         {formatDate(post.date)}
                     </time>
-                    <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-2'>
+                    <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-1.5'>
                         <InlineMarkdown>{post.title}</InlineMarkdown>
                     </h1>
                 </header>

@@ -120,8 +120,19 @@
     * {
         @apply border-border outline-ring/50;
     }
+
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
         @apply bg-background text-foreground;
+        font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    }
+
+    ::selection {
+        @apply bg-foreground/10 dark:bg-foreground/15;
     }
 }
 

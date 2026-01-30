@@ -59,7 +59,7 @@ export default function RootLayout({
                 <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
                     <div className='min-h-screen flex flex-col'>
                         <header>
-                            <nav className='max-w-xl mx-auto px-5 pt-8 pb-4 flex justify-between items-center'>
+                            <nav className='max-w-xl mx-auto px-5 py-6 flex justify-between items-center'>
                                 <Link
                                     href='/'
                                     className='text-[15px] font-medium text-foreground/90 transition-opacity duration-200 hover:opacity-60'
@@ -69,7 +69,10 @@ export default function RootLayout({
                                 <ModeToggle />
                             </nav>
                         </header>
-                        <main className='flex-1 max-w-xl mx-auto px-5 py-16 w-full'>{children}</main>
+                        <main className='flex-1 max-w-xl mx-auto px-5 pt-12 pb-24 w-full'>{children}</main>
+                        <footer className='max-w-xl mx-auto px-5 pb-8 w-full'>
+                            <p className='text-[13px] text-foreground/20'>© {new Date().getFullYear()}</p>
+                        </footer>
                     </div>
                 </ThemeProvider>
                 <Analytics />

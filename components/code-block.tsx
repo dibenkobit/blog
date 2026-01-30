@@ -37,12 +37,11 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
                 variant='ghost'
                 size='icon-xs'
                 className={cn(
-                    'absolute top-2 right-2',
+                    'absolute top-3 right-3',
                     'opacity-0 group-hover:opacity-100',
                     'transition-opacity duration-200',
-                    'text-neutral-500 hover:text-neutral-700',
-                    'dark:text-neutral-400 dark:hover:text-neutral-200',
-                    'hover:bg-black/5 dark:hover:bg-white/10'
+                    'text-foreground/40 hover:text-foreground/70',
+                    'hover:bg-foreground/5'
                 )}
                 onClick={handleCopy}
                 aria-label={copied ? 'Copied' : 'Copy code'}
