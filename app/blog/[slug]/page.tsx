@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
-import { CodeBlock } from '@/components/code-block';
-import { InlineMarkdown } from '@/components/inline-markdown';
 import { Separator } from '@/components/ui/separator';
-import { AUTHOR_NAME, SITE_URL } from '@/lib/constants';
+import { AUTHOR_NAME, SITE_URL } from '@/config/site';
+import { CodeBlock } from '@/features/posts/components/code-block';
+import { InlineMarkdown } from '@/features/posts/components/inline-markdown';
+import { getAllSlugs, getPostBySlug } from '@/features/posts/posts';
 import { formatDate } from '@/lib/date.utils';
-import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 
 interface Props {
     params: Promise<{ slug: string }>;

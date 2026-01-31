@@ -1,10 +1,10 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
 import { ThemeProvider } from '@/components/theme-provider';
-import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
+import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/config/site';
 import './globals.css';
 
 const geistSans = Geist({

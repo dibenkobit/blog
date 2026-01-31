@@ -1,4 +1,4 @@
-import { AUTHOR_NAME } from '@/lib/constants';
+import { AUTHOR_NAME } from '@/config/site';
 
 const socialLinks = [
     { href: '/feed.xml', label: 'RSS', external: false },

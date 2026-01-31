@@ -3,29 +3,11 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { cache } from 'react';
 import { stripMarkdown } from './markdown.utils';
+import type { Post, PostMeta } from './posts.types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 const draftsDirectory = path.join(process.cwd(), 'content/drafts');
 const isDev = process.env.NODE_ENV === 'development';
-
-interface Post {
-    slug: string;
-    title: string;
-    titlePlain: string;
-    date: string;
-    description: string;
-    descriptionPlain: string;
-    content: string;
-}
-
-interface PostMeta {
-    slug: string;
-    title: string;
-    titlePlain: string;
-    date: string;
-    description: string;
-    descriptionPlain: string;
-}
 
 /**
  * Normalizes a date value from frontmatter to ISO string (YYYY-MM-DD).
@@ -88,8 +70,6 @@ function parseFrontmatter(data: Record<string, unknown>, slug: string): Omit<Pos
         descriptionPlain: seoDescription ?? stripMarkdown(description)
     };
 }
-
-export { formatDate } from './date.utils';
 
 function getPostsFromDirectory(directory: string): PostMeta[] {
     if (!fs.existsSync(directory)) {

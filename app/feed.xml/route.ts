@@ -1,5 +1,5 @@
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
-import { getAllPosts } from '@/lib/posts';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/config/site';
+import { getAllPosts } from '@/features/posts/posts';
 
 export function GET() {
     const posts = getAllPosts();
