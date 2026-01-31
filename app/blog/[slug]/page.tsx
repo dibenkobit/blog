@@ -92,7 +92,7 @@ export default async function PostPage({ params }: Props) {
                         <InlineMarkdown>{post.title}</InlineMarkdown>
                     </h1>
                 </header>
-                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-pre:bg-transparent'>
+                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-code:bg-foreground/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent'>
                     <Markdown
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeHighlight]}
