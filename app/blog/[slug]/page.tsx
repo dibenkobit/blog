@@ -78,7 +78,7 @@ export default async function PostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <article>
-                <header className='mb-16'>
+                <header className='mb-0'>
                     <Link
                         href='/'
                         className='text-[13px] text-foreground/40 transition-colors duration-200 hover:text-foreground/70'
