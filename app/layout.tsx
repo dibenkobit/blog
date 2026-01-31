@@ -58,7 +58,7 @@ export default function RootLayout({
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-                    <div className='min-h-screen flex flex-col'>
+                    <div className='min-h-dvh flex flex-col'>
                         <Header />
                         <main className='flex-1 max-w-xl mx-auto px-5 pt-12 pb-24 w-full'>{children}</main>
                         <Footer />
