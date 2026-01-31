@@ -6,6 +6,7 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '@/components/code-block';
 import { InlineMarkdown } from '@/components/inline-markdown';
+import { Separator } from '@/components/ui/separator';
 import { AUTHOR_NAME, SITE_URL } from '@/lib/constants';
 import { formatDate } from '@/lib/date.utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
@@ -78,7 +79,7 @@ export default async function PostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <article>
-                <header className='mb-0'>
+                <header>
                     <Link
                         href='/'
                         className='text-[13px] text-foreground/40 transition-colors duration-200 hover:text-foreground/70'
@@ -91,8 +92,14 @@ export default async function PostPage({ params }: Props) {
                     <h1 className='text-2xl font-medium tracking-tight text-foreground/90 mt-1.5'>
                         <InlineMarkdown>{post.title}</InlineMarkdown>
                     </h1>
+                    {post.description && (
+                        <p className='text-foreground/50 mt-2'>
+                            <InlineMarkdown>{post.description}</InlineMarkdown>
+                        </p>
+                    )}
                 </header>
-                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-code:bg-foreground/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent'>
+                <Separator className='my-10' />
+                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-code:bg-[#f6f8fa] dark:prose-code:bg-[#161b22] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent'>
                     <Markdown
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeHighlight]}
