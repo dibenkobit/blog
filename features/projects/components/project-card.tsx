@@ -17,7 +17,7 @@ export function ProjectCard({ name, description, link, image }: ProjectCardProps
         >
             {image && (
                 <div className='aspect-square relative bg-foreground/5'>
-                    <Image src={image} alt={name} fill className='object-cover' />
+                    <Image src={image} alt={name} fill sizes='(max-width: 640px) 50vw, 33vw' className='object-cover' />
                 </div>
             )}
             <div className='p-3 flex-1'>

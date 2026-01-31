@@ -10,6 +10,17 @@ import { CodeBlock } from '@/features/posts/components/code-block';
 import { InlineMarkdown } from '@/features/posts/components/inline-markdown';
 import { getAllSlugs, getPostBySlug } from '@/features/posts/posts';
 import { formatDate } from '@/lib/date.utils';
+import { cn } from '@/lib/utils';
+
+const proseStyles = cn(
+    'prose prose-neutral dark:prose-invert max-w-none',
+    'prose-p:text-foreground/70 prose-p:leading-relaxed',
+    'prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90',
+    'prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50',
+    'prose-strong:text-foreground/90 prose-strong:font-medium',
+    'prose-code:text-foreground/80 prose-code:font-normal prose-code:bg-[#f6f8fa] dark:prose-code:bg-[#161b22] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none',
+    'prose-pre:bg-transparent'
+);
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -99,7 +110,7 @@ export default async function PostPage({ params }: Props) {
                     )}
                 </header>
                 <Separator className='my-10' />
-                <div className='prose prose-neutral dark:prose-invert max-w-none prose-p:text-foreground/70 prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/90 prose-a:text-foreground/90 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-foreground/20 hover:prose-a:decoration-foreground/50 prose-strong:text-foreground/90 prose-strong:font-medium prose-code:text-foreground/80 prose-code:font-normal prose-code:bg-[#f6f8fa] dark:prose-code:bg-[#161b22] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-transparent'>
+                <div className={proseStyles}>
                     <Markdown
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeHighlight]}
