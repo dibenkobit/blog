@@ -1,6 +1,8 @@
 <skills>
-Use skills:
+Always use next skills (if any of them is unavailable - tell user):
 - atomic-commits-philosophy
+- vercel-composition-patterns
+- vercel-react-best-practices
 </skills>
 
 <project_rules>
