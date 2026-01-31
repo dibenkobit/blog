@@ -3,8 +3,8 @@ import { AUTHOR_NAME } from '@/lib/constants';
 const socialLinks = [
     { href: '/feed.xml', label: 'RSS', external: false },
     { href: 'https://github.com/dibenkobit', label: 'GitHub', external: true },
-    { href: 'https://x.com/dibenkobit', label: 'X', external: true },
-    { href: 'https://www.linkedin.com/in/snetkov-nikita/', label: 'LinkedIn', external: true }
+    { href: 'https://www.linkedin.com/in/snetkov-nikita/', label: 'LinkedIn', external: true },
+    { href: 'https://x.com/dibenkobit', label: 'X', external: true }
 ] as const;
 
 export function Footer() {
