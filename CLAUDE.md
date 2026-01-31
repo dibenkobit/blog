@@ -1,5 +1,12 @@
+<skills>
+Use skills:
+- atomic-commits-philosophy
+</skills>
+
 <project_rules>
-Use conventional commits. Run `bun run check:fix` before every commit. Only fix formatting manually when check:fix cannot auto-fix. Do not commit when linter errors or warnings exist.
+- Run `bun run check:fix` before every commit.
+- Only fix formatting manually when check:fix cannot auto-fix.
+- Do not commit when linter errors or warnings exist.
 </project_rules>
 
 <analysis_protocol>
